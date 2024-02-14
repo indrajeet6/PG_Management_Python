@@ -1,0 +1,2 @@
+https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv
+https://python-adv-web-apps.readthedocs.io/en/latest/flask_forms.html

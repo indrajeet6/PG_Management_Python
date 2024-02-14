@@ -40,3 +40,17 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+.flash {
+    padding: 20px;
+    margin: 20px;
+}
+
+    .flash.error {
+        background-color: #ffa7ae;
+        color: #a02a36;
+    }
+
+    .flash.success {
+        background-color: #96faad;
+        color: #1c7530;
+    }

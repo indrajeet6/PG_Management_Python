@@ -31,6 +31,9 @@
     <Compile Include="PG_Management\Config\ConfigReader.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="PG_Management\PythonForms\AddNewTenant.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="runserver.py" />
     <Compile Include="PG_Management\__init__.py" />
     <Compile Include="PG_Management\views.py" />
@@ -38,6 +41,7 @@
   <ItemGroup>
     <Folder Include="PG_Management\" />
     <Folder Include="PG_Management\Config\" />
+    <Folder Include="PG_Management\PythonForms\" />
     <Folder Include="PG_Management\static\" />
     <Folder Include="PG_Management\static\content\" />
     <Folder Include="PG_Management\static\fonts\" />
@@ -70,7 +74,7 @@
     <Content Include="PG_Management\static\scripts\respond.min.js" />
     <Content Include="PG_Management\static\scripts\_references.js" />
     <Content Include="PG_Management\templates\about.html" />
-    <Content Include="PG_Management\templates\contact.html" />
+    <Content Include="PG_Management\templates\AddNewTenant.html" />
     <Content Include="PG_Management\templates\index.html" />
     <Content Include="PG_Management\templates\layout.html" />
   </ItemGroup>

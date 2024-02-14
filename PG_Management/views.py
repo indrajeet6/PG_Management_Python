@@ -4,9 +4,14 @@ Routes and views for the flask application.
 from pickle import OBJ
 import mysql.connector
 from datetime import datetime
-from flask import render_template
+from flask import render_template, request
 from PG_Management import app
 from PG_Management.Config.ConfigReader import getConfig
+from flask_wtf import FlaskForm, CSRFProtect
+from wtforms import StringField, SubmitField
+from flask import flash
+from PG_Management.PythonForms.AddNewTenant import AddNewTenant
+import PG_Management.PythonForms
 
 @app.route('/')
 @app.route('/home')
@@ -28,14 +33,23 @@ def home():
         data = myresult,
     )
 
-@app.route('/contact')
-def contact():
+@app.route('/NewTenant', methods=['GET', 'POST'])
+def NewTenant():
     """Renders the contact page."""
+    form = AddNewTenant()
+    message = ""
+    if request.method == "POST":
+      if form.validate_on_submit():
+          flash(f"Data Added Successfully!", category="success")
+      else:
+         flash(f"An Error Happened!", category="error")  
+          
     return render_template(
-        'contact.html',
-        title='Contact',
+        'AddNewTenant.html',
+        title='Add New Tenant',
         year=datetime.now().year,
-        message='Your contact page.'
+        message='Add New Tenant',
+        form=form
     )
 
 @app.route('/about')
