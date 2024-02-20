@@ -1,14 +1,26 @@
 {% extends "layout.html" %}
-{% from 'bootstrap5/form.html' import render_form %}
+{% from 'bootstrap5/form.html' import render_form_row, render_form %}
 
 {% block content %}
     {% for category, message in get_flashed_messages(with_categories=true) %}
-    <div class="flash {{ category }}">{{ message }}</div>
+<div class="flash {{ category }}">{{ message }}</div>
     {% endfor %}
 
 <h2>{{ title }}.</h2>
-<h3>{{ message }}</h3>
+</br>
 
-{{ render_form(form) }}
-
+<form method="post">
+    {{ form.csrf_token }}
+    <div class="col p-3">
+        <div class="form-group col-md-3">
+            {{render_form_row([form.strTenantName, form.strTenantOccupation, form.strCurrentAddress, form.strPermanentAddress, form.strOfficeAddress, form.strMobile])}}
+        </div>
+        <div class="form-group col-md-3">
+            {{render_form_row([form.strFatherName, form.strFatherOccupation, form.strFatherCurrentAddress, form.strFatherPermanentAddress, form.strFatherOfficeAddress, form.strFatherMobile])}}
+        </div>
+        <div class="form-group col-md-3">
+            {{render_form_row([form.strLGName, form.strLGOccupation, form.strLGCurrentAddress, form.strLGPermanentAddress, form.strLGOfficeAddress, form.strLGMobile, form.submit])}}
+        </div>
+    </div>
+</form>
 {% endblock %}

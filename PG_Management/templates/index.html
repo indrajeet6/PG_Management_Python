@@ -6,24 +6,28 @@
     <h1>PG Management System</h1>
     <p class="lead">This is a PG Management System using Python and MySQL.</p>
 </div>
-<div class="text-center">
-    <table border="1">
-        <tr>
-            <th>Tenant_ID</th>
-            <th>Name</th>
-            <th>Rent Amount</th>
-            <th>Payment Date</th>
-            <th>Payment Status</th>
-        </tr>
-        {% for item in data %}
-        <tr>
-            <td>{{item[0]}}</td>
-            <td>{{item[1]}}</td>
-            <td>{{item[2]}}</td>
-            <td>{{item[3]}}</td>
-            <td>{{item[4]}}</td>
-            {% endfor %}
-        </tr>
+<div class="table-responsive">
+    <table class="text-center table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th style="text-align: center" scope="col">Tenant_ID</th>
+                <th style="text-align: center" scope="col">Name</th>
+                <th style="text-align: center" scope="col">Rent Amount</th>
+                <th style="text-align: center" scope="col">Payment Date</th>
+                <th style="text-align: center" scope="col">Payment Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+                <td>{{item[3]}}</td>
+                <td>{{item[4]}}</td>
+                {% endfor %}
+            </tr>
+        </tbody>
     </table>
 </div>
 

@@ -46,7 +46,7 @@ def NewTenant():
           
     return render_template(
         'AddNewTenant.html',
-        title='Add New Tenant',
+        title='Add data for a new Tenant',
         year=datetime.now().year,
         message='Add New Tenant',
         form=form
