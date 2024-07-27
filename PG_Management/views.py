@@ -40,9 +40,37 @@ def NewTenant():
     message = ""
     if request.method == "POST":
       if form.validate_on_submit():
+          data = request.form
+          mydb = mysql.connector.connect(
+              host = getConfig("LocalDB","host"),
+              user = getConfig("LocalDB","user"),
+              password = getConfig("LocalDB","password"),
+           )
+          # Get Form Data
+          strTenantName = data["strTenantName"]
+          strTenantOccupation = data["strTenantOccupation"]
+          strCurrentAddress = data["strCurrentAddress"]
+          strPermanentAddress = data["strPermanentAddress"]
+          strOfficeAddress = data["strOfficeAddress"]
+          strMobile = str(data["strMobile"])
+
+          # Get Last used ID
+          mycursor = mydb.cursor()
+          mycursor.execute("SELECT Tenant_ID FROM db_a6d03c_pgmgmt.tenant_details ORDER BY Tenant_ID DESC limit 1;")
+          myresult = mycursor.fetchall()
+          # Create ID
+          strID = int(myresult[0][0])+1
+          
+          # Insert into DB
+          mycursor = mydb.cursor()
+          # print (typeof(strID))
+          # print (typeof(strMobile))
+          strQuery = "INSERT INTO db_a6d03c_pgmgmt.tenant_details VALUES ("+strID+",'"+strTenantName+"','"+strTenantOccupation+"','"+strCurrentAddress+"','"+strPermanentAddress+"','"+strOfficeAddress+"','"+strMobile+"');"
+          mycursor.execute(strQuery)
+          myresult = mycursor.fetchall()
           flash(f"Data Added Successfully!", category="success")
       else:
-         flash(f"An Error Happened!", category="error")  
+         flash(f"An Error Occurred!", category="error")  
           
     return render_template(
         'AddNewTenant.html',
