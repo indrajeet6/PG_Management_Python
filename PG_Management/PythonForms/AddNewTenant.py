@@ -12,6 +12,7 @@ class AddNewTenant(FlaskForm):
     strPermanentAddress = TextAreaField("Permanent Address", validators=[DataRequired()])
     strOfficeAddress = TextAreaField("Office Address", validators=[DataRequired()])
     strMobile= IntegerField("Mobile Phone Number", validators=[DataRequired(), NumberRange(min=1000000000, max=9999999999)])
+    strRentAmount = IntegerField("Rent Amount", validators=[DataRequired(), NumberRange(min=1000, max=9999999999)])
     
     #Tenant Father Details
     strFatherName = StringField("Name of Father", validators=[DataRequired()])
@@ -30,4 +31,3 @@ class AddNewTenant(FlaskForm):
     strLGMobile= IntegerField("Mobile Phone Number", validators=[DataRequired(), NumberRange(min=1000000000, max=9999999999)])
     
     submit = SubmitField("Submit")
-    

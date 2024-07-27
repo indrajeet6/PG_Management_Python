@@ -65,8 +65,17 @@ def NewTenant():
           mycursor = mydb.cursor()
           # print (typeof(strID))
           # print (typeof(strMobile))
-          strQuery = "INSERT INTO db_a6d03c_pgmgmt.tenant_details VALUES ("+strID+",'"+strTenantName+"','"+strTenantOccupation+"','"+strCurrentAddress+"','"+strPermanentAddress+"','"+strOfficeAddress+"','"+strMobile+"');"
-          mycursor.execute(strQuery)
+          strTenantQuery = "INSERT INTO db_a6d03c_pgmgmt.tenant_details VALUES ("+strID+",'"+strTenantName+"','"+strTenantOccupation+"','"+strCurrentAddress+"','"+strPermanentAddress+"','"+strOfficeAddress+"','"+strMobile+"');"
+          strFatherQuery =  "INSERT INTO db_a6d03c_pgmgmt.father_details VALUES ("+strID+",'"+strFatherName+"','"+strFatherOccupation+"','"+strFatherCurrentAddress+"','"+strFatherPermanentAddress+"','"+strFatherOfficeAddress+"','"+strFatherMobile+"');"
+          strLGQuery =  "INSERT INTO db_a6d03c_pgmgmt.lg_details VALUES ("+strID+",'"+strLGName+"','"+strLGOccupation +"','"+strLGCurrentAddress +"','"+strLGPermanentAddress +"','"+strLGOfficeAddress +"','"+strLGMobile+"');"
+          strPGQuery = "INSERT INTO db_a6d03c_pgmgmt.pg_table VALUES ("+strID+"',1',curdate(),1,"+strRentAmount+",0,'1900-01-01');"
+          mycursor.execute(strTenantQuery)
+          myresult = mycursor.fetchall()
+          mycursor.execute(strFatherQuery)
+          myresult = mycursor.fetchall()
+          mycursor.execute(strLGQuery)
+          myresult = mycursor.fetchall()
+          mycursor.execute(strPGQuery)
           myresult = mycursor.fetchall()
           flash(f"Data Added Successfully!", category="success")
       else:
