@@ -23,7 +23,7 @@ def home():
           password = getConfig("LocalDB","password"),
     )
     mycursor = mydb.cursor()
-    mycursor.execute("SELECT * FROM db_a6d03c_pgmgmt.`payment status`;")
+    mycursor.execute("SELECT * FROM db_a6d03c_pgmgmt.payment_status;")
     myresult = mycursor.fetchall()
     
     return render_template(
@@ -53,13 +53,28 @@ def NewTenant():
           strPermanentAddress = data["strPermanentAddress"]
           strOfficeAddress = data["strOfficeAddress"]
           strMobile = str(data["strMobile"])
+          strRentAmount =data["strRentAmount"]
+          
+          strFatherName = data["strFatherName"]
+          strFatherOccupation = data["strFatherOccupation"]
+          strFatherCurrentAddress = data["strFatherCurrentAddress"]
+          strFatherPermanentAddress = data["strFatherPermanentAddress"]
+          strFatherOfficeAddress = data["strFatherOfficeAddress"]
+          strFatherMobile = str(data["strFatherMobile"])
 
+          strLGName = data["strLGName"]
+          strLGOccupation = data["strLGOccupation"]
+          strLGCurrentAddress = data["strLGCurrentAddress"]
+          strLGPermanentAddress = data["strLGPermanentAddress"]
+          strLGOfficeAddress = data["strLGOfficeAddress"]
+          strLGMobile = str(data["strLGMobile"])
+          
           # Get Last used ID
           mycursor = mydb.cursor()
           mycursor.execute("SELECT Tenant_ID FROM db_a6d03c_pgmgmt.tenant_details ORDER BY Tenant_ID DESC limit 1;")
           myresult = mycursor.fetchall()
           # Create ID
-          strID = int(myresult[0][0])+1
+          strID = str(int(myresult[0][0])+1)
           
           # Insert into DB
           mycursor = mydb.cursor()
@@ -68,15 +83,17 @@ def NewTenant():
           strTenantQuery = "INSERT INTO db_a6d03c_pgmgmt.tenant_details VALUES ("+strID+",'"+strTenantName+"','"+strTenantOccupation+"','"+strCurrentAddress+"','"+strPermanentAddress+"','"+strOfficeAddress+"','"+strMobile+"');"
           strFatherQuery =  "INSERT INTO db_a6d03c_pgmgmt.father_details VALUES ("+strID+",'"+strFatherName+"','"+strFatherOccupation+"','"+strFatherCurrentAddress+"','"+strFatherPermanentAddress+"','"+strFatherOfficeAddress+"','"+strFatherMobile+"');"
           strLGQuery =  "INSERT INTO db_a6d03c_pgmgmt.lg_details VALUES ("+strID+",'"+strLGName+"','"+strLGOccupation +"','"+strLGCurrentAddress +"','"+strLGPermanentAddress +"','"+strLGOfficeAddress +"','"+strLGMobile+"');"
-          strPGQuery = "INSERT INTO db_a6d03c_pgmgmt.pg_table VALUES ("+strID+"',1',curdate(),1,"+strRentAmount+",0,'1900-01-01');"
+          strPGQuery = "INSERT INTO db_a6d03c_pgmgmt.pg_table VALUES ("+strID+",1,curdate(),1,"+strRentAmount+",0,'1900-01-01');"
           mycursor.execute(strTenantQuery)
-          myresult = mycursor.fetchall()
+          # myresult = mycursor.fetchall()
           mycursor.execute(strFatherQuery)
-          myresult = mycursor.fetchall()
+          # myresult = mycursor.fetchall()
           mycursor.execute(strLGQuery)
-          myresult = mycursor.fetchall()
+          # myresult = mycursor.fetchall()
           mycursor.execute(strPGQuery)
-          myresult = mycursor.fetchall()
+          # myresult = mycursor.fetchall()
+          mydb.commit()
+          
           flash(f"Data Added Successfully!", category="success")
       else:
          flash(f"An Error Occurred!", category="error")  
